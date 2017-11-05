@@ -5921,6 +5921,9 @@ by a #."
 	    (add-text-properties	; For end_src
 	     end1 (min (point-max) (1+ end)) '(face org-meta-line))
 	    (org-remove-flyspell-overlays-in end1 end)
+      ;; Patches org-mode to natively fontify #+BEGIN_LaTeX blocks
+      ;; See https://www.reddit.com/r/emacs/comments/57whx0/how_to_fontify_begin_latex_blocks_natively/
+      (if (string= block-type "latex") (setq lang "latex"))
 	    (cond
 	     ((and lang (not (string= lang "")) org-src-fontify-natively)
 	      (org-src-font-lock-fontify-block lang block-start block-end)
